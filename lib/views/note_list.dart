@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app_with_rest_api/models/note_for_listing.dart';
+import 'package:note_app_with_rest_api/views/note_modify.dart';
 
 class NoteList extends StatelessWidget {
   //const NoteList({Key? key}) : super(key: key);
@@ -43,20 +44,40 @@ class NoteList extends StatelessWidget {
         title: Text('List of Notes'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => NoteModify(),
+            ),
+          );
+        },
         child: Icon(Icons.add),
       ),
       body: ListView.separated(
         itemBuilder: (_, index) {
-          return ListTile(
-            title: Text(
-              notes[index].noteTitle,
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
+          return Dismissible(
+            key: ValueKey(notes[index].noteID),
+            direction: DismissDirection.startToEnd,
+            child: ListTile(
+              title: Text(
+                notes[index].noteTitle,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
+              subtitle: Text(
+                'Last edited on ${formatDateTime(notes[index].lastEditDateTime)}',
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => NoteModify(
+                      noteID: notes[index].noteID,
+                    ),
+                  ),
+                );
+              },
             ),
-            subtitle: Text(
-                'Last edited on ${formatDateTime(notes[index].lastEditDateTime)}'),
           );
         },
         separatorBuilder: (_, __) => Divider(height: 1, color: Colors.green),
