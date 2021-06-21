@@ -38,26 +38,30 @@ class NoteModify extends StatelessWidget {
             SizedBox(
               height: 24.0,
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (isEditing) {
-                    // update note in api
-                  } else {
-                    // create in API
-                  }
+            Align(
+              alignment: Alignment.centerRight,
+              child: SizedBox(
+                width: double.infinity,
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (isEditing) {
+                      // update note in api
+                    } else {
+                      // create in API
+                    }
 
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                child: Text(
-                  'SUBMIT',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    primary: Color(0xFF004D40),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
                   ),
+                  child: Text('SUBMIT'),
                 ),
               ),
             ),
